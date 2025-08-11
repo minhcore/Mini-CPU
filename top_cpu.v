@@ -65,9 +65,12 @@ wire C_ALU, V_ALU;
 reg cpu_run = 1;
 wire reset;
 always @(posedge clk) begin
-	 if (HALT) begin
+	if (HALT) begin
 		cpu_run <= 0;
 	end
+	else if (reset) begin
+		cpu_run <= 1;
+	end 
 end
 	assign cpu_clk = clk & cpu_run;
 	assign reset = ~reset_n;
