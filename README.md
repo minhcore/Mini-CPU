@@ -27,10 +27,10 @@
   ADD A
   JP END
   SUB A
-END
+END:
   HLT  </pre>
 #### - All the command need to be go through register C (I will write custom compiler C to convert C -> my custom assembly so that is more user-friendly.)
-#### - So when the result is 15 => It is Positive => JUMP to the address that has the name "END", that is where HLT command placed.
+#### - So when the result is 15 => It is Positive => JUMP to the address that has the name "END:", that is where HLT command placed.
 ## My Goal
 ### My goal is to solve problems using my own CPU so I can learn computer architecture, digital design, i/o communication, algorithm solving skills,...
 ## Planned Upgrades

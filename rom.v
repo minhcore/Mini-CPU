@@ -10,10 +10,10 @@ case(addr)
 8'h00: data = 16'h1300;
 8'h01: data = 16'h1003;
 8'h02: data = 16'h1004;
-8'h03: data = 16'h13A6;
+8'h03: data = 16'h134C;
 8'h04: data = 16'h1000;
 8'h05: data = 16'h1142;
-8'h06: data = 16'h1306;
+8'h06: data = 16'h1301;
 8'h07: data = 16'h1001;
 8'h08: data = 16'h1A26;
 8'h09: data = 16'h0F00;
