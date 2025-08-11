@@ -10,7 +10,7 @@
 ### - Using custom Assembly and custom ISA (<a href="https://docs.google.com/document/d/1spk6qTvlEQv3vK2T30NwYCHgVy-ZGenoJlQO8q8Q0LQ/edit?tab=t.0" target="_blank">More Detailed</a>)
 ### - Runs on Tang Nano 9K FPGA.
 ## A Picture of my CPU mini
-![CPU mini](images/cpu_pic.jpg)
+![CPU mini](cpu_pic.jpg)
 ## User Instruction and Example Code
 ### User Instruction:
 #### Step 1: Clone repo 
