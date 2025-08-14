@@ -1,8 +1,12 @@
 module bcd_to_7led (
 	input [3:0] bcd,
+	input mode,
 	output reg [6:0] seg
 );
 always @(*) begin
+	if (mode == 1'b0) begin
+	seg = 7'b0000001;
+	end else begin
 	case (bcd)
 		4'd0: seg = 7'b1111110;
 		4'd1: seg = 7'b0011000;
@@ -16,5 +20,6 @@ always @(*) begin
 		4'd9: seg = 7'b0111111;
 		default: seg = 7'b0000000;
 	endcase
+	end
 end
 endmodule

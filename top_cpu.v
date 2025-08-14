@@ -1,10 +1,10 @@
-module top_cpu (input clk, input reset_n, output N_led, output [6:0] led_hundreds, output [6:0] led_tens, output [6:0] led_ones, output led_debug);
+module top_cpu (input clk, input reset_n, input n_but, input uart_rx, output N_led, output [6:0] led_hundreds, output [6:0] led_tens, output [6:0] led_ones, output led_debug);
 wire cpu_clk;
 	// Control Signals
 wire [7:0] opcode;   // opcode direct from CIR
 wire [7:0] operand;  // operand direct from AR
 wire [3:0] step;
-wire       Z, N, C, V;
+wire       Z, N, C, V, mode;
 wire tmp_dummy_wire = ROM_output[0] || opcode[0] || operand[0];
 // Control outputs
 wire       PC_out;
@@ -312,13 +312,18 @@ end
 		.data_in(BUS),
 		.data_out(BUS)
 	);
-	rom ROM (
+	ram_programable ram_programable (
 		.addr(ROM_addr_input),
-		.data(ROM_output)
+		.data(ROM_output),
+		.clk(cpu_clk),
+		.uart_rx(uart_rx),
+		.n_but(n_but),
+		.mode(mode)
 	);
 	hex_to_decimal led_segment (
 		.in(flag_input),
 		.signed_flag(N),
+		.mode(mode),
 		.led_hundreds(led_hundreds),
 		.led_tens(led_tens),
 		.led_ones(led_ones),

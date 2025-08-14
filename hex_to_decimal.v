@@ -1,6 +1,7 @@
 module hex_to_decimal (
 	input			[7:0] in,
 	input			signed_flag,
+	input 			mode,
 	output 			[6:0] led_ones,
 	output			[6:0] led_tens,
 	output			[6:0] led_hundreds,
@@ -30,14 +31,17 @@ always @(*) begin
 end
 bcd_to_7led led_ones_module (
 	.bcd(ones),
+	.mode(mode),
 	.seg(led_ones)
 );
 bcd_to_7led led_tens_module (
 	.bcd(tens),
+	.mode(mode),
 	.seg(led_tens)
 );
 bcd_to_7led led_hundreds_module (
 	.bcd(hundreds),
+	.mode(mode),
 	.seg(led_hundreds)
 );
 endmodule
