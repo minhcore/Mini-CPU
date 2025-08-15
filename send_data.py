@@ -24,4 +24,4 @@ with open("G:/Other computers/My Computer/study_folder_sh/design cpu/Mini-CPU/pr
         print(f"Sent word {count}: {high:02X} {low:02X}")
 
 ser.close()
-print(f"Sent {count} words ({count*2} bytes)")
+print(f"Sent {count} words")

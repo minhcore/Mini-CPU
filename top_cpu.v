@@ -5,7 +5,7 @@ wire [7:0] opcode;   // opcode direct from CIR
 wire [7:0] operand;  // operand direct from AR
 wire [3:0] step;
 wire       Z, N, C, V, mode;
-wire tmp_dummy_wire = ROM_output[0] || opcode[0] || operand[0];
+wire tmp_dummy_wire = CIR_input[0] || opcode[0] || operand[0] || ROM_output[0];
 // Control outputs
 wire       PC_out;
 wire       PC_inc;
@@ -62,8 +62,12 @@ wire [15:0] ROM_output;
 wire [15:0] CIR_input;
 wire C_ALU, V_ALU;
 
-reg cpu_run = 1;
 wire reset;
+assign cpu_clk = clk & cpu_run;
+assign reset = ~reset_n;
+assign led_debug = tmp_dummy_wire;
+reg cpu_run = 1;
+
 always @(posedge clk) begin
 	if (reset) begin
 		cpu_run <= 1;
@@ -72,9 +76,6 @@ always @(posedge clk) begin
 		cpu_run <= 0;
 	end 
 end
-	assign cpu_clk = clk & cpu_run;
-	assign reset = ~reset_n;
-	assign led_debug = tmp_dummy_wire;
 	
 	// INSTANT MODULE 
 	// Register A
@@ -312,12 +313,14 @@ end
 		.data_in(BUS),
 		.data_out(BUS)
 	);
-	ram_programable ram_programable (
-		.addr(ROM_addr_input),
-		.data(ROM_output),
-		.clk(cpu_clk),
-		.uart_rx(uart_rx),
-		.n_but(n_but),
+	//uart_ram
+	uart_ram uart_ram (
+		.clk(clk),
+		.button(n_but),
+		.reset(reset),
+		.rx(uart_rx),
+		.addrPC(ROM_addr_input),
+		.dataOut(ROM_output),
 		.mode(mode)
 	);
 	hex_to_decimal led_segment (
