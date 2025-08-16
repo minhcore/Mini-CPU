@@ -4,7 +4,7 @@ wire [7:0] opcode;   // opcode direct from CIR
 wire [7:0] operand;  // operand direct from AR
 wire [3:0] step;
 wire       Z, N, C, V, mode;
-wire tmp_dummy_wire = CIR_input[0] || opcode[0] || operand[0] || ROM_output[0];
+
 // Control outputs
 wire       PC_out;
 wire       PC_inc;
@@ -63,6 +63,7 @@ wire C_ALU, V_ALU;
 reg cpu_run;
 wire reset;
 assign reset = ~reset_n;
+wire tmp_dummy_wire = CIR_input[0] || opcode[0] || operand[0] || ROM_output[0];
 assign led_debug = tmp_dummy_wire;
 
 always @(posedge clk) begin
@@ -236,7 +237,7 @@ end
 		.inc_enable(SC_inc),
 		.out_data(step), // direct
 		.data_out(), // tristate
-		.in_data(1'b0)
+		.in_data(4'b0)
 	);
 	// PC
 	register #(.WIDTH(8)) PC (
@@ -296,7 +297,6 @@ end
 	.AR_in(AR_in),
 	.AR_reset(AR_reset),
 	.AR_out(AR_out),
-	.AR_sel(AR_sel),
 	.RAM_in(RAM_in),
 	.RAM_out(RAM_out),
 	.flag_in(flag_in),
