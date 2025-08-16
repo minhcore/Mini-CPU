@@ -180,11 +180,11 @@ always @(posedge clk) begin
         end
     end
 end 
-always @(*) begin                 //runmode
+always @(posedge clk) begin                 //runmode
     if (modeState == 1'b1) begin
-    dataOut = mem[addrPC];
+    dataOut <= mem[addrPC];
     end
-    else dataOut = 16'd0;
+    else dataOut <= 16'd0;
 end
 assign mode = modeState;
 endmodule   

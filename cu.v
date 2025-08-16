@@ -1,5 +1,5 @@
 module CU (
-	input wire			clk,
+	input wire			clk, cpu_run,
 	input wire [7:0]	opcode, // opcode direct from CIR
 	input wire [7:0]	operand, // operand direct from AR
 	input wire [3:0] 	step,
@@ -108,6 +108,8 @@ module CU (
 		SC_reset,regA_in,regA_out,regA_reset,regB_in,regB_out,regB_reset,regD_in,regD_out,regD_reset,
 		regE_in,regE_out,regE_reset,regF_in,regF_out,regF_reset,regG_in,regG_out,regG_reset,regH_in,regH_out,regH_reset,regC_in_enable,regC_out_enable,
 		regC_rst,regC_sel,AR_in,AR_reset,AR_out,RAM_in,RAM_out,flag_in,HALT} = 0;
+		
+		if (cpu_run == 1'b1) begin
 		SC_inc = 1;
 		
 		if (step < 4'd5 ) begin
@@ -454,6 +456,10 @@ module CU (
 				default : ;
 			endcase
 		end
+	end 
+	else begin
+		SC_inc = 0;
+	end
 	end
 endmodule
 

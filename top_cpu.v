@@ -1,5 +1,4 @@
 module top_cpu (input clk, input reset_n, input n_but, input uart_rx, output N_led, output [6:0] led_hundreds, output [6:0] led_tens, output [6:0] led_ones, output led_debug);
-wire cpu_clk;
 	// Control Signals
 wire [7:0] opcode;   // opcode direct from CIR
 wire [7:0] operand;  // operand direct from AR
@@ -61,12 +60,10 @@ wire [7:0] ROM_addr_input;
 wire [15:0] ROM_output;
 wire [15:0] CIR_input;
 wire C_ALU, V_ALU;
-
+reg cpu_run;
 wire reset;
-assign cpu_clk = clk & cpu_run;
 assign reset = ~reset_n;
 assign led_debug = tmp_dummy_wire;
-reg cpu_run = 1;
 
 always @(posedge clk) begin
 	if (reset) begin
@@ -80,7 +77,7 @@ end
 	// INSTANT MODULE 
 	// Register A
 	register #(.WIDTH(8)) regA (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regA_in),
 		.out_enable(regA_out),
@@ -91,7 +88,7 @@ end
 	);
 	// Register B
 	register #(.WIDTH(8)) regB (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regB_in),
 		.out_enable(regB_out),
@@ -102,7 +99,7 @@ end
 	);
 	// Register C
 	regC regC (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regC_in_enable),
 		.out_enable(regC_out_enable),
@@ -114,7 +111,7 @@ end
 	);
 	// Register D
 	register #(.WIDTH(8)) regD (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regD_in),
 		.out_enable(regD_out),
@@ -125,7 +122,7 @@ end
 	);
 	// Register E
 	register #(.WIDTH(8)) regE (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regE_in),
 		.out_enable(regE_out),
@@ -136,7 +133,7 @@ end
 	);
 	// Register F
 	register #(.WIDTH(8)) regF (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regF_in),
 		.out_enable(regF_out),
@@ -147,7 +144,7 @@ end
 	);
 	// Register G
 	register #(.WIDTH(8)) regG (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regG_in),
 		.out_enable(regG_out),
@@ -158,7 +155,7 @@ end
 	);
 	// Register H
 	register #(.WIDTH(8)) regH (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(regH_in),
 		.out_enable(regH_out),
@@ -169,7 +166,7 @@ end
 	);
 	// MAR
 	MAR MAR (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(MAR_in),
 		.in_data(BUS),
@@ -177,7 +174,7 @@ end
 	);
 	// MDR
 	register #(.WIDTH(16)) MDR (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(MDR_in),
 		.inc_enable(1'b0),
@@ -188,7 +185,7 @@ end
 	);
 	// CIR 
 	CIR CIR (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(CIR_in),
 		.out_enable(CIR_out),
@@ -199,7 +196,7 @@ end
 	);
 	// AR
 	register #(.WIDTH(8)) AR (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.in_enable(AR_in),
 		.out_enable(AR_out),
@@ -210,7 +207,7 @@ end
 	);
 	// flag_check
 	flag_check flag_check (
-		.clk(cpu_clk),
+		.clk(clk),
 		.data(flag_input),
 		.latch(flag_in),
 		.C_ALU(C_ALU),
@@ -231,7 +228,7 @@ end
 	);
 	// SC
 	SC SC (
-		.clk(cpu_clk),
+		.clk(clk),
 		.reset(reset),
 		.reset_mol(SC_reset),
 		.in_enable(1'b0),
@@ -243,7 +240,7 @@ end
 	);
 	// PC
 	register #(.WIDTH(8)) PC (
-	.clk(cpu_clk),
+	.clk(clk),
 	.reset(reset),
 	.in_enable(PC_in),
 	.out_enable(PC_out),
@@ -254,7 +251,8 @@ end
 	);
 	// CU
 	CU CU (
-	.clk(cpu_clk),
+	.clk(clk),
+	.cpu_run(cpu_run),
 	.opcode(opcode), .operand(operand), .step(step),
 	.Z(Z), .N(N), .C(C), .V(V),
 	.PC_out(PC_out),
@@ -306,7 +304,7 @@ end
 	);
 	// RAM
 	ram RAM (
-		.clk(cpu_clk),
+		.clk(clk),
 		.we(RAM_in),
 		.re(RAM_out),
 		.addr(RAM_addr_input),
