@@ -61,6 +61,8 @@ wire [15:0] ROM_output;
 wire [15:0] CIR_input;
 wire C_ALU, V_ALU;
 reg cpu_run;
+reg clk_sample;
+reg [4:0] cnt;
 wire reset;
 assign reset = ~reset_n;
 wire tmp_dummy_wire = CIR_input[0] || opcode[0] || operand[0] || ROM_output[0];
@@ -73,6 +75,17 @@ always @(posedge clk) begin
 	else if (HALT) begin
 		cpu_run <= 0;
 	end 
+end
+always @(posedge clk) begin
+	if (reset) begin
+		cnt <= 5'd0;
+		clk_sample <= 0;
+	end
+	else if (cnt == 5'd28) begin
+		cnt <= 0;
+		clk_sample <= ~clk_sample;
+	end 
+	else cnt <= cnt + 5'd1;
 end
 	
 	// INSTANT MODULE 
