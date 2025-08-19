@@ -76,17 +76,6 @@ always @(posedge clk) begin
 		cpu_run <= 0;
 	end 
 end
-always @(posedge clk) begin
-	if (reset) begin
-		cnt <= 5'd0;
-		clk_sample <= 0;
-	end
-	else if (cnt == 5'd28) begin
-		cnt <= 0;
-		clk_sample <= ~clk_sample;
-	end 
-	else cnt <= cnt + 5'd1;
-end
 	
 	// INSTANT MODULE 
 	// Register A

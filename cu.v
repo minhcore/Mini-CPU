@@ -1,5 +1,5 @@
 module CU (
-	input wire			clk, cpu_run,
+	input wire			clk, cpu_run, reset,
 	input wire [7:0]	opcode, // opcode direct from CIR
 	input wire [7:0]	operand, // operand direct from AR
 	input wire [3:0] 	step,
@@ -50,6 +50,7 @@ module CU (
 	output reg			flag_in,
 	output reg			HALT
 );
+reg SC_reset_next;
 
 	// Task : Operand Processing (mode, reg dest, reg src)
 	task handle_operand(
@@ -89,7 +90,6 @@ module CU (
 						3'b011: regD_in = 1;
 						3'b100: regE_in = 1;
 						3'b101: regF_in = 1;
-						3'b101: regF_in = 1;
 						3'b110: regH_in = 1;
 						3'b111: regG_in = 1;
 						default: ;
@@ -103,14 +103,31 @@ module CU (
 	
 	// Main Control Logic
 	always @(posedge clk) begin
+		if (reset) begin
+			SC_reset <= 1;
+			SC_inc <= 0;
+		end
+		else begin
+			SC_reset <= SC_reset_next;
+			if (cpu_run) begin
+				if (SC_reset) begin
+					SC_inc <= 0;
+				end
+				else begin
+					SC_inc <= 1;
+				end
+			end
+			else begin
+				SC_inc <= 0;
+			end
+		end
+	end
+	always @(*) begin
 		// Reset all control signals every cycle
 		{PC_out,PC_inc,PC_in,PC_reset,MAR_in,MAR_reset,MDR_in,MDR_reset,CIR_in,CIR_out,CIR_reset,
 		SC_reset,regA_in,regA_out,regA_reset,regB_in,regB_out,regB_reset,regD_in,regD_out,regD_reset,
 		regE_in,regE_out,regE_reset,regF_in,regF_out,regF_reset,regG_in,regG_out,regG_reset,regH_in,regH_out,regH_reset,regC_in_enable,regC_out_enable,
 		regC_rst,regC_sel,AR_in,AR_reset,AR_out,RAM_in,RAM_out,flag_in,HALT} = 0;
-		
-		if (cpu_run == 1'b1) begin
-		SC_inc = 1;
 		
 		if (step < 4'd5 ) begin
 			// FETCH ( 4 step )
@@ -132,7 +149,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h01 : begin // SUB
@@ -143,7 +160,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h02 : begin // AND 
@@ -154,7 +171,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h03 : begin // OR
@@ -165,7 +182,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h04 : begin // XOR 
@@ -176,7 +193,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h05 : begin // SLT
@@ -187,7 +204,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h06 : begin // INC
@@ -198,7 +215,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h07 : begin // DEC
@@ -209,7 +226,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h08 : begin // LSL
@@ -220,7 +237,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h09 : begin // LSR
@@ -231,7 +248,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h0A : begin // ASR
@@ -242,7 +259,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h0B : begin // ROL
@@ -253,7 +270,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h0C : begin // ROR
@@ -263,15 +280,15 @@ module CU (
 					if (step == 4'd6) begin
 						flag_in = 1;
 					end
-					if (step == 4'd6) begin
-						SC_reset = 1;
+					if (step == 4'd7) begin
+						SC_reset_next = 1;
 					end
 				end
 				8'h0D : begin // NOP
 					if (step == 4'd5) begin
 					end
 					if (step == 4'd6) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h0E : begin // HLT
@@ -295,7 +312,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd8) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h10 : begin // STORE addr
@@ -304,7 +321,7 @@ module CU (
 						RAM_in = 1;
 					end
 					if (step == 4'd6) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h11 : begin // MOV Rs, C
@@ -312,7 +329,7 @@ module CU (
 						handle_operand(operand, 1, 1);
 					end
 					if (step == 4'd6) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h12 : begin // MOV C, Rs
@@ -324,7 +341,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h13 : begin // MOV C, #Immediate
@@ -337,7 +354,7 @@ module CU (
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h14 : begin // JMP addr
@@ -346,7 +363,7 @@ module CU (
 						PC_in = 1;
 					end
 					if (step == 4'd6) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 					end
 				end
 				8'h15 : begin // JZ addr
@@ -356,10 +373,10 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
 				8'h16 : begin // JNZ addr
@@ -369,10 +386,10 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
 				8'h17 : begin // JC addr
@@ -382,10 +399,10 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
 				8'h18 : begin // JNC addr
@@ -395,10 +412,10 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
 				8'h19 : begin // JP addr
@@ -408,10 +425,10 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
 				8'h1A : begin // JN addr
@@ -421,10 +438,10 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
 				8'h1B : begin // JO addr
@@ -434,10 +451,10 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
 				8'h1C : begin // JZ addr
@@ -447,20 +464,16 @@ module CU (
 							PC_in = 1;
 						end
 						if (step == 4'd6) begin
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 					end else begin 
-							SC_reset = 1;
+							SC_reset_next = 1;
 						end
 				end
-				default : ;
+				default :SC_reset_next = 1;
 			endcase
 		end
 	end 
-	else begin
-		SC_inc = 0;
-	end
-	end
 endmodule
 
 						
