@@ -125,7 +125,7 @@ reg SC_reset_next;
 	always @(*) begin
 		// Reset all control signals every cycle
 		{PC_out,PC_inc,PC_in,PC_reset,MAR_in,MAR_reset,MDR_in,MDR_reset,CIR_in,CIR_out,CIR_reset,
-		SC_reset,regA_in,regA_out,regA_reset,regB_in,regB_out,regB_reset,regD_in,regD_out,regD_reset,
+		SC_reset_next,regA_in,regA_out,regA_reset,regB_in,regB_out,regB_reset,regD_in,regD_out,regD_reset,
 		regE_in,regE_out,regE_reset,regF_in,regF_out,regF_reset,regG_in,regG_out,regG_reset,regH_in,regH_out,regH_reset,regC_in_enable,regC_out_enable,
 		regC_rst,regC_sel,AR_in,AR_reset,AR_out,RAM_in,RAM_out,flag_in,HALT} = 0;
 		
@@ -308,7 +308,7 @@ reg SC_reset_next;
 						flag_in = 1;
 					end
 					if (step == 4'd7) begin
-						SC_reset = 1;
+						SC_reset_next = 1;
 						flag_in = 1;
 					end
 					if (step == 4'd8) begin
