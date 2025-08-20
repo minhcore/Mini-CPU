@@ -15,10 +15,10 @@
 ### User Instruction:
 #### Step 1: Clone repo 
 #### Step 2: Open in Gowin IDE
-#### Step 3: Write your own program by writing custom assembly code into "assembly.txt" file, then use "assembly_to_machine_code.cpp" to convert custom assembly -> machine code. Then use "rom_convert.cpp" to create a hardwired ROM so cpu can run on Tang Nano 9K.
-#### Step 4: Create your own physical constraint file and timing constraint file on IDE.
-#### Step 5: Flash to Tang Nano 9K.
-#### >>>The process of converting hardwired ROM requires us to re-flashing data on fpga so it takes a long time. Planned upgrade: UART loader to allow program without re-flashing the FPGA.<<<
+#### Step 3: Create your own physical constraint file and timing constraint file on IDE.
+#### Step 4: Flash to Tang Nano 9K.
+#### Step 5: Write your own custom assembly code into "assembly.txt". Then use "assembly_to_machine_code.cpp" to convert them into machine code. Finally use "send_data.py" to send machine code to CPU.
+#### NOTE: If you want to reload new code, you need to reset CPU.
 ### Example Code:
 #### - I will show a example code how to write custom assembly to do 10 + 5 and JUMP to HLT command:
 <pre>  MOV_C, #10
@@ -34,7 +34,7 @@ END:
 ## My Goal
 ### My goal is to solve problems using my own CPU so I can learn computer architecture, digital design, i/o communication, algorithm solving skills,...
 ## Planned Upgrades
-### - UART loader for faster program loading
+### - ADD UART TX 
 ### - Add more i/o communications
 ### - More instruction (CALL/RET...)
 ### - Compiler C to convert C language -> custom assembly
