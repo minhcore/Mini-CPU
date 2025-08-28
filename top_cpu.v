@@ -1,4 +1,4 @@
-module top_cpu (input clk, input reset_n, input n_but, input uart_rx, output N_led, output [6:0] led_hundreds, output [6:0] led_tens, output [6:0] led_ones, output led_debug);
+module top_cpu (input clk, input reset_n, input n_but, input uart_rx, output N_led, output [6:0] led_hundreds, output [6:0] led_tens, output [6:0] led_ones, output led_debug, output uart_tx_pin);
 	// Control Signals
 wire [7:0] opcode;   // opcode direct from CIR
 wire [7:0] operand;  // operand direct from AR
@@ -52,6 +52,9 @@ wire       RAM_in;
 wire       RAM_out;
 wire       flag_in;
 wire       HALT;
+wire	   uart_send_data;
+wire	   uart_tx_in;
+wire	   busyFlag;
 wire [7:0] BUS;
 wire [7:0] ALU_output;
 wire [7:0] flag_input;
@@ -255,6 +258,7 @@ end
 	// CU
 	CU CU (
 	.clk(clk),
+	.reset(reset),
 	.cpu_run(cpu_run),
 	.opcode(opcode), .operand(operand), .step(step),
 	.Z(Z), .N(N), .C(C), .V(V),
@@ -302,6 +306,9 @@ end
 	.RAM_in(RAM_in),
 	.RAM_out(RAM_out),
 	.flag_in(flag_in),
+	.uart_send_data(uart_send_data),
+	.uart_tx_in(uart_tx_in),
+	.busyFlag(busyFlag),
 	.HALT(HALT)
 	);
 	// RAM
@@ -331,6 +338,15 @@ end
 		.led_tens(led_tens),
 		.led_ones(led_ones),
 		.led_signed(N_led)
+	);
+	uart_tx uart_tx (
+		.clk(clk),
+		.reset(reset),
+		.in_enable(uart_tx_in),
+		.send_data(uart_send_data),
+		.bus(BUS),
+		.txPin(uart_tx_pin),
+		.busyFlag(busyFlag)
 	);
 endmodule
 	

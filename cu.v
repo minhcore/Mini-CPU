@@ -1,5 +1,5 @@
 module CU (
-	input wire			clk, cpu_run, reset,
+	input wire			clk, cpu_run, reset, busyFlag,
 	input wire [7:0]	opcode, // opcode direct from CIR
 	input wire [7:0]	operand, // operand direct from AR
 	input wire [3:0] 	step,
@@ -48,6 +48,8 @@ module CU (
 	output reg			RAM_in,
 	output reg			RAM_out,
 	output reg			flag_in,
+	output reg			uart_tx_in,
+	output reg			uart_send_data,
 	output reg			HALT
 );
 reg SC_reset_next;
@@ -114,7 +116,8 @@ reg SC_reset_next;
 					SC_inc <= 0;
 				end
 				else begin
-					SC_inc <= 1;
+					if (busyFlag == 1'b1) SC_inc <= 0;
+					else SC_inc <= 1;
 				end
 			end
 			else begin
@@ -127,7 +130,7 @@ reg SC_reset_next;
 		{PC_out,PC_inc,PC_in,PC_reset,MAR_in,MAR_reset,MDR_in,MDR_reset,CIR_in,CIR_out,CIR_reset,
 		SC_reset_next,regA_in,regA_out,regA_reset,regB_in,regB_out,regB_reset,regD_in,regD_out,regD_reset,
 		regE_in,regE_out,regE_reset,regF_in,regF_out,regF_reset,regG_in,regG_out,regG_reset,regH_in,regH_out,regH_reset,regC_in_enable,regC_out_enable,
-		regC_rst,regC_sel,AR_in,AR_reset,AR_out,RAM_in,RAM_out,flag_in,HALT} = 0;
+		regC_rst,regC_sel,AR_in,AR_reset,AR_out,RAM_in,RAM_out,flag_in,HALT,uart_tx_in,uart_send_data} = 0;
 		
 		if (step < 4'd5 ) begin
 			// FETCH ( 4 step )
@@ -316,12 +319,29 @@ reg SC_reset_next;
 					end
 				end
 				8'h10 : begin // STORE addr
-					if (step == 4'd5) begin
-						regC_out_enable = 1;
-						RAM_in = 1;
+					if (operand == 8'hFE) begin
+						if (step == 4'd5) begin
+							regC_out_enable = 1;
+							uart_tx_in = 1;
+						end
+						if (step == 4'd6) begin
+							uart_send_data = 1;
+						end
+						if (step == 4'd7) begin
+							
+						end
+						if (step == 4'd8) begin
+							SC_reset_next = 1;
+						end
 					end
-					if (step == 4'd6) begin
-						SC_reset_next = 1;
+					else begin
+						if (step == 4'd5) begin
+							regC_out_enable = 1;
+							RAM_in = 1;
+						end
+						if (step == 4'd6) begin
+							SC_reset_next = 1;
+						end
 					end
 				end
 				8'h11 : begin // MOV Rs, C
