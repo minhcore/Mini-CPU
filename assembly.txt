@@ -1,16 +1,53 @@
-MOV C, #54
+MOV C, #84
 STR 01
-MOV C, #48
+MOV C, #104
 STR 02
-MOV C, #41
+MOV C, #97  
 STR 03
-MOV C, #4F
+MOV C, #111
 STR 04
+MOV C, #32
+STR 05
+MOV C, #88
+STR 06
+MOV C, #105
+STR 07
+MOV C, #110
+STR 08
+MOV C, #104
+STR 09
+MOV C, #32
+STR 10
+MOV C, #71
+STR 11
+MOV C, #97
+STR 12
+MOV C, #105
+STR 13
 LOAD 01
 STR UART_TX
 LOAD 02 
 STR UART_TX
 LOAD 03 
 STR UART_TX
-LOAD 04
+LOAD 04                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 STR UART_TX
+LOAD 05 
+STR UART_TX
+LOAD 06
+STR UART_TX
+LOAD 07
+STR UART_TX
+LOAD 08
+STR UART_TX
+LOAD 09
+STR UART_TX
+LOAD 10 
+STR UART_TX
+LOAD 11
+STR UART_TX
+LOAD 12
+STR UART_TX
+LOAD 13 
+STR UART_TX
+HLT
