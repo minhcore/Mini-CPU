@@ -169,7 +169,11 @@ int main () {
                         operand = 0x00;
                     } else if (ins_table[i].has_operand == 1) {
                         if (strcmp(mnemonic, "LOAD") == 0 || strcmp(mnemonic, "STR") == 0) {
-							if (isdigit(op1[0])) {
+							if (strcmp(op1, "UART_TX") == 0) {
+            					operand = 0xFE;
+        					} else if (strcmp(op1, "UART_RX") == 0) {
+            					operand = 0xFF;
+							} else if (isdigit(op1[0])) {
 								operand = (uint8_t)strtol(op1, NULL, 10);  
 							} else {
 								int addr = find_label(op1);
