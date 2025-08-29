@@ -1,5 +1,5 @@
 module CU (
-	input wire			clk, cpu_run, reset, busyFlag,
+	input wire			clk, cpu_run, reset, busyFlag, byteReady,
 	input wire [7:0]	opcode, // opcode direct from CIR
 	input wire [7:0]	operand, // operand direct from AR
 	input wire [3:0] 	step,
@@ -50,9 +50,10 @@ module CU (
 	output reg			flag_in,
 	output reg			uart_tx_in,
 	output reg			uart_send_data,
+	output reg			readyRead,
 	output reg			HALT
 );
-reg SC_reset_next;
+reg SC_reset_next, cpu_read;
 
 	// Task : Operand Processing (mode, reg dest, reg src)
 	task handle_operand(
@@ -116,7 +117,7 @@ reg SC_reset_next;
 					SC_inc <= 0;
 				end
 				else begin
-					if (busyFlag == 1'b1) SC_inc <= 0;
+					if (busyFlag == 1'b1 || cpu_read == 1'b1) SC_inc <= 0;
 					else SC_inc <= 1;
 				end
 			end
@@ -125,12 +126,23 @@ reg SC_reset_next;
 			end
 		end
 	end
+	always @(posedge clk) begin
+		if (reset) cpu_read <= 0;
+		else begin
+			if (opcode == 8'h0F && operand == 8'hFF && step == 4'd5) begin
+				cpu_read <= 1;
+			end 
+			else if (byteReady) begin
+				cpu_read <= 0;
+			end
+		end
+	end
 	always @(*) begin
 		// Reset all control signals every cycle
 		{PC_out,PC_inc,PC_in,PC_reset,MAR_in,MAR_reset,MDR_in,MDR_reset,CIR_in,CIR_out,CIR_reset,
 		SC_reset_next,regA_in,regA_out,regA_reset,regB_in,regB_out,regB_reset,regD_in,regD_out,regD_reset,
 		regE_in,regE_out,regE_reset,regF_in,regF_out,regF_reset,regG_in,regG_out,regG_reset,regH_in,regH_out,regH_reset,regC_in_enable,regC_out_enable,
-		regC_rst,regC_sel,AR_in,AR_reset,AR_out,RAM_in,RAM_out,flag_in,HALT,uart_tx_in,uart_send_data} = 0;
+		regC_rst,regC_sel,AR_in,AR_reset,AR_out,RAM_in,RAM_out,flag_in,HALT,uart_tx_in,uart_send_data,readyRead} = 0;
 		
 		if (step < 4'd5 ) begin
 			// FETCH ( 4 step )
@@ -300,23 +312,37 @@ reg SC_reset_next;
 					end
 				end
 				8'h0F : begin // LOAD addr
-					if (step == 4'd5) begin
-						RAM_out = 1;
-						
+					if (operand == 8'hFF) begin
+						if (step == 4'd6) begin
+							if (byteReady) begin
+								regC_in_enable = 1;
+								regC_sel = 1;
+								flag_in = 1;
+								readyRead = 1;
+							end
+						end
+						if (step == 4'd7) begin
+								SC_reset_next = 1;
+						end
 					end
-					if (step == 4'd6) begin
-						RAM_out = 1;
-						regC_in_enable = 1;
-						regC_sel = 1;
-						flag_in = 1;
-					end
-					if (step == 4'd7) begin
-						SC_reset_next = 1;
-						flag_in = 1;
-					end
-					if (step == 4'd8) begin
-						SC_reset_next = 1;
-					end
+					else begin
+						if (step == 4'd5) begin
+							RAM_out = 1;
+						end
+						if (step == 4'd6) begin
+							RAM_out = 1;
+							regC_in_enable = 1;
+							regC_sel = 1;
+							flag_in = 1;
+						end
+						if (step == 4'd7) begin
+							SC_reset_next = 1;
+							flag_in = 1;
+						end
+						if (step == 4'd8) begin
+							SC_reset_next = 1;
+						end
+					end	
 				end
 				8'h10 : begin // STORE addr
 					if (operand == 8'hFE) begin

@@ -6,8 +6,11 @@ module uart_ram #(
     input wire reset,
     input wire rx,
     input [7:0] addrPC,
+    input readyRead,
     output reg [15:0] dataOut,
-    output wire mode
+    output wire mode,
+    output [7:0] bus,
+    output reg byteReady
 );
 
 localparam HALF_DELAY = (DELAY/2);
@@ -32,6 +35,8 @@ reg [15:0] mem [0:255];
 reg modeState; //0: loadmode, 1:runmode
 reg [7:0] ramAdrr;
 reg button_ff0, button_ff1;
+reg [7:0] data_reg;
+
 
 wire counter_end, start, start_end, data_end, stop_end, get_data, button_fall;
 assign get_data = (counter == HALF_DELAY);
@@ -140,10 +145,13 @@ always @(posedge clk) begin
     if (reset == 1'b1) begin
             buffReady <= 1'b0;
             byteCount <= 1'b0;
+            byteReady <= 1'b0;
     end
     else begin
         buffReady <= 1'b0;
+        byteReady <= 1'b0;
         if ((next == STOP) && (state != STOP)) begin
+            byteReady <= 1'b1;
             if (byteCount == 0) begin
                 lowByte <= dataIn;
                 byteCount <= 1'b1;
@@ -200,5 +208,17 @@ always @(posedge clk) begin                 //runmode
     end
     else dataOut <= 16'd0;
 end
+//user input
+always @(posedge clk) begin
+    if (reset == 1'b1) begin
+       data_reg <= 8'd0; 
+    end
+    else if (modeState == 1'b1) begin
+        if (byteReady) begin
+            data_reg <= dataIn;
+        end
+    end
+end
 assign mode = modeState;
+assign bus = (readyRead) ? data_reg : 8'bz;
 endmodule   

@@ -55,6 +55,7 @@ wire       HALT;
 wire	   uart_send_data;
 wire	   uart_tx_in;
 wire	   busyFlag;
+wire       readyRead;
 wire [7:0] BUS;
 wire [7:0] ALU_output;
 wire [7:0] flag_input;
@@ -309,6 +310,8 @@ end
 	.uart_send_data(uart_send_data),
 	.uart_tx_in(uart_tx_in),
 	.busyFlag(busyFlag),
+	.readyRead(readyRead),
+	.byteReady(byteReady),
 	.HALT(HALT)
 	);
 	// RAM
@@ -328,7 +331,10 @@ end
 		.rx(uart_rx),
 		.addrPC(ROM_addr_input),
 		.dataOut(ROM_output),
-		.mode(mode)
+		.mode(mode),
+		.bus(BUS),
+		.readyRead(readyRead),
+		.byteReady(byteReady)
 	);
 	hex_to_decimal led_segment (
 		.in(flag_input),
