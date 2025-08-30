@@ -2,6 +2,7 @@
 ### It uses custom Assembly to solve the problems.
 ## Features:
 ### - Harvard Architecture.
+### - Has input and output to terminal using Python.
 ### - Register C - temporary register for holding intermediate results.
 ### - ALU: add, sub, shift, rotate, slt,...
 ### - Separate RAM & ROM.
@@ -17,7 +18,7 @@
 #### Step 2: Open in Gowin IDE
 #### Step 3: Create your own physical constraint file and timing constraint file on IDE.
 #### Step 4: Flash to Tang Nano 9K.
-#### Step 5: Write your own custom assembly code into "assembly.txt". Then use "assembly_to_machine_code.cpp" to convert them into machine code. Finally use "send_data.py" to send machine code to CPU.
+#### Step 5: Write your own custom assembly code into "assembly.txt". Then use "assembly_to_machine_code.cpp" to convert them into machine code. Finally use "send_program.py" to send machine code to CPU.
 #### NOTE: If you want to reload new code, you need to reset CPU.
 ### Example Code:
 #### - I will show a example code how to write custom assembly to do 10 + 5 and JUMP to HLT command:
@@ -33,8 +34,7 @@ END:
 #### - So when the result is 15 => It is Positive => JUMP to the address that has the name "END:", that is where HLT command placed.
 ## My Goal
 ### My goal is to solve problems using my own CPU so I can learn computer architecture, digital design, i/o communication, algorithm solving skills,...
-## Planned Upgrades
-### - ADD UART TX 
+## Planned Upgrades 
 ### - Add more i/o communications
 ### - More instruction (CALL/RET...)
 ### - Compiler C to convert C language -> custom assembly

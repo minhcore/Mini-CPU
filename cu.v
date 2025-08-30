@@ -53,7 +53,9 @@ module CU (
 	output reg			readyRead,
 	output reg			HALT
 );
-reg SC_reset_next, cpu_read;
+reg SC_reset_next;
+wire is_load_uart = (opcode == 8'h0F) && (operand == 8'hFF);
+wire stall_uart = is_load_uart && (step >= 4'd5) && (byteReady == 1'b0);
 
 	// Task : Operand Processing (mode, reg dest, reg src)
 	task handle_operand(
@@ -117,23 +119,12 @@ reg SC_reset_next, cpu_read;
 					SC_inc <= 0;
 				end
 				else begin
-					if (busyFlag == 1'b1 || cpu_read == 1'b1) SC_inc <= 0;
+					if (busyFlag == 1'b1 || stall_uart == 1'b1) SC_inc <= 0;
 					else SC_inc <= 1;
 				end
 			end
 			else begin
 				SC_inc <= 0;
-			end
-		end
-	end
-	always @(posedge clk) begin
-		if (reset) cpu_read <= 0;
-		else begin
-			if (opcode == 8'h0F && operand == 8'hFF && step == 4'd5) begin
-				cpu_read <= 1;
-			end 
-			else if (byteReady) begin
-				cpu_read <= 0;
 			end
 		end
 	end
@@ -313,15 +304,11 @@ reg SC_reset_next, cpu_read;
 				end
 				8'h0F : begin // LOAD addr
 					if (operand == 8'hFF) begin
-						if (step == 4'd6) begin
-							if (byteReady) begin
+						if (step == 4'd7) begin
 								regC_in_enable = 1;
 								regC_sel = 1;
 								flag_in = 1;
 								readyRead = 1;
-							end
-						end
-						if (step == 4'd7) begin
 								SC_reset_next = 1;
 						end
 					end
