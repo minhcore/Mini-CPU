@@ -101,6 +101,68 @@ wire stall_uart = is_load_uart && (step >= 4'd5) && (byteReady == 1'b0);
 					endcase
 				end
 			end
+			2'b00: begin // Memory Mode
+				if (opcode == 8'h1D)  begin // STR_Rs R1, R2 => both is source
+					if (src_en) begin
+						case (src) 
+							3'b000: regA_out = 1;
+							3'b001: regB_out = 1;
+							3'b010: regC_out_enable = 1;
+							3'b011: regD_out = 1;
+							3'b100: regE_out = 1;
+							3'b101: regF_out = 1;
+							3'b110: regH_out = 1;
+							3'b111: regG_out = 1;
+							default: ;
+						endcase
+					end
+					if (dest_en) begin
+						case (dest)
+							3'b000: regA_out = 1;
+							3'b001: regB_out = 1;
+							3'b010: regC_out_enable = 1;
+							3'b011: regD_out = 1;
+							3'b100: regE_out = 1;
+							3'b101: regF_out = 1;
+							3'b110: regH_out = 1;
+							3'b111: regG_out = 1;
+							default: ;
+						endcase
+					end
+				end
+				else if (opcode == 8'h1E) begin // LOAD_Rs R1, R2 => R1 is des, R2 is src
+					if (src_en) begin
+						case (src) 
+							3'b000: regA_out = 1;
+							3'b001: regB_out = 1;
+							3'b010: regC_out_enable = 1;
+							3'b011: regD_out = 1;
+							3'b100: regE_out = 1;
+							3'b101: regF_out = 1;
+							3'b110: regH_out = 1;
+							3'b111: regG_out = 1;
+							default: ;
+						endcase
+					end
+					if (dest_en) begin
+						case (dest)
+							3'b000: regA_in = 1;
+							3'b001: regB_in = 1;
+							3'b010: begin
+								regC_in_enable = 1;
+								regC_sel = 1;
+								flag_in = 1;
+							end
+							3'b011: regD_in = 1;
+							3'b100: regE_in = 1;
+							3'b101: regF_in = 1;
+							3'b110: regH_in = 1;
+							3'b111: regG_in = 1;
+							default: ;
+						endcase
+					end
+				end
+			end
 			default: ; // Reserved
 		endcase
 	end
@@ -502,6 +564,34 @@ wire stall_uart = is_load_uart && (step >= 4'd5) && (byteReady == 1'b0);
 					end else begin 
 							SC_reset_next = 1;
 						end
+				end
+				8'h1D: begin // STR_Rs R1, R2
+					if (step == 4'd5) begin //R2 -> BUS -> AR
+						handle_operand(operand, 0, 1);
+						AR_in = 1;
+					end
+					if (step == 4'd6) begin //R1 -> BUS -> RAM
+						handle_operand(operand, 1, 0);
+						RAM_in = 1;
+					end
+					if (step == 4'd7) begin
+						SC_reset_next = 1;
+					end
+				end
+				8'h1E: begin // LOAD_Rs R1, R2
+					if (step == 4'd5) begin // R2 -> BUS -> AR
+						handle_operand(operand, 0, 1); // src = R2
+						AR_in = 1;
+					end
+					if (step == 4'd6) begin // wait for ram stable
+						RAM_out = 1;
+					end
+					if (step == 4'd7) begin // RAM -> BUS -> R1
+						handle_operand(operand, 1, 0);
+					end
+					if (step == 4'd8) begin
+						SC_reset_next = 1;
+					end
 				end
 				default :SC_reset_next = 1;
 			endcase
