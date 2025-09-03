@@ -50,7 +50,9 @@ Instruction ins_table[] = {
 	{"JP",	0x19, 1},
 	{"JN",	0x1A, 1},
 	{"JO",	0x1B, 1},
-	{"JNO",	0x1C, 1}
+	{"JNO",	0x1C, 1},
+	{"STR_Rs", 0x1D, 2},
+	{"LOAD_Rs", 0x1E, 2}
 	 	
 };
 const int ins_count = sizeof(ins_table)/sizeof(ins_table[0]);
@@ -206,7 +208,11 @@ int main () {
                         }
 
                         if (src >= 0 && dst >= 0) {
-                            operand = (1 << 6) | (dst << 3) | src;
+                        	if (strcmp(mnemonic, "STR_Rs") == 0 || strcmp(mnemonic, "LOAD_Rs") == 0) {
+                        		operand = (0 << 6) | (dst << 3) | src;
+							} else {
+                            	operand = (1 << 6) | (dst << 3) | src;
+                        	}
                         } else {
                             operand = 0x00;
                         }
