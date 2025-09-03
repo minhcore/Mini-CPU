@@ -52,7 +52,7 @@ while True:
         print(f"Text: {text} | Hex: {hex_str} | Bin: {bin_str} | Dec: {dec_str}")
 
     else:
-        if time.time() - last_data_time > 10:
-            print("No data for 10 seconds, maybe CPU halted. Closing serial...")
+        if time.time() - last_data_time > 15:
+            print("No data for 15 seconds, maybe CPU halted. Closing serial...")
             ser.close()
             break

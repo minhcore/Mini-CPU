@@ -1,5 +1,99 @@
 MOV C, #127
 STR UART_TX
 LOAD UART_RX
-STR UART_TX
+STR 00
+MOV C, #0
+MOV_Rs A, C
+STR 04
+main_loop:
+LOAD 00
+SLT A
+JZ final_result
+LOAD 00
+STR 00
+MOV C, #10
+STR 06
+MOV C, #0
+STR 01
+LOAD 00
+STR 05
+loop_div:
+LOAD 05
+MOV_Rs B, C
+LOAD 06
+SLT B
+JNZ result_div
+LOAD 05
+MOV_Rs B, C
+LOAD 06
+SUB B
+STR 05
+LOAD 01
+INC
+STR 01
+JMP loop_div
+result_div:
+LOAD 01
+STR 10
+MOV C, #10
+STR 07
+MOV C, #1
+MOV_Rs D, C
+MOV C, #0
+STR 02
+loop_mul:
+LOAD 07
+MOV_Rs E, C
+MOV_C C, D
+SLT E
+JNZ result_mul	
+LOAD 10
+MOV_Rs E, C
+LOAD 02
+ADD E
+STR 02
+MOV_C C, D
+INC
+MOV_Rs D, C
+JMP loop_mul
+result_mul:
+LOAD 00
+MOV_Rs F, C
+LOAD 02
+SUB F
+STR 03
+LOAD 04
+STR 09
+MOV C, #10
+STR 07
+MOV C, #1
+MOV_Rs D, C
+MOV C, #0
+STR 08
+loop_mul_one:
+LOAD 07
+MOV_Rs E, C
+MOV_C C, D
+SLT E
+JNZ result_mul_one
+LOAD 09
+MOV_Rs E, C
+LOAD 08
+ADD E
+STR 08
+MOV_C C, D
+INC
+MOV_Rs D, C
+JMP loop_mul_one
+result_mul_one:
+LOAD 08
+MOV_Rs H, C
+LOAD 03
+ADD H
+STR 04
+LOAD 01
+STR 00
+JMP main_loop
+final_result:
+LOAD 04
 HLT
