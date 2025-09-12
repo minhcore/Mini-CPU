@@ -1,0 +1,75 @@
+MOV C, #127
+STR UART_TX
+LOAD UART_RX
+STR 50
+MOV C, #0
+MOV_Rs A, C
+input:
+LOAD 50
+SLT A
+JZ main
+MOV C, #127
+STR UART_TX
+LOAD UART_RX
+STR_Rs C, A
+MOV_C C, A
+INC
+MOV_Rs A, C
+JMP input
+main:
+MOV C, #0
+MOV_Rs A, C
+loop:
+LOAD 50
+SLT A
+JZ output
+MOV C, #0
+MOV_Rs B, C
+LOAD 50
+DEC
+MOV_Rs D, C
+MOV_C C, A
+SUB D
+STR 51
+small_loop:
+LOAD 51
+SLT B
+JZ inc_loop
+MOV_C C, B
+INC 
+MOV_Rs E, C
+LOAD_Rs F, E
+LOAD_Rs C, B
+SLT F
+JZ inc_small_loop
+LOAD_Rs C, B
+STR 52
+LOAD_Rs C, E
+STR_Rs C, B
+LOAD 52
+STR_Rs C, E
+inc_small_loop:
+MOV_C C, B
+INC
+MOV_Rs B, C
+JMP small_loop
+inc_loop:
+MOV_C C, A
+INC
+MOV_Rs A, C
+JMP loop
+output:
+MOV C, #0
+MOV_Rs A, C
+output_loop:
+LOAD 50
+SLT A
+JZ end
+LOAD_Rs C, A
+STR UART_TX
+MOV_C C, A
+INC
+MOV_Rs A, C
+JMP output_loop
+end:
+HLT
