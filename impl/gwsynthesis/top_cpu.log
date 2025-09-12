@@ -1,0 +1,65 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\CIR.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\MAR.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\alu.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\bcd_to_7led.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\cu.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\flag_check.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\hex_to_decimal.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\ram.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\regC.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\sc.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\top_cpu.v'
+Undeclared symbol 'byteReady', assumed default net type 'wire'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\top_cpu.v":314)
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\uart_ram.v'
+Analyzing Verilog file 'G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\uart_tx.v'
+Compiling module 'top_cpu'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\top_cpu.v":1)
+Compiling module 'register'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v":1)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v":19)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 8("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v":22)
+Compiling module 'regC'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\regC.v":1)
+Compiling module 'MAR'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\MAR.v":1)
+Compiling module 'register(WIDTH=16)'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v":1)
+WARN  (EX3791) : Expression size 17 truncated to fit in target size 16("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v":19)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 16("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v":22)
+Compiling module 'CIR'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\CIR.v":1)
+Compiling module 'flag_check'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\flag_check.v":1)
+Compiling module 'alu'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\alu.v":1)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 9("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\alu.v":44)
+WARN  (EX2420) : Latch inferred for net 'sub[7]'; We do not recommend the use of latches in FPGA designs, as they may lead to timing problems("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\alu.v":71)
+Compiling module 'SC'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\sc.v":1)
+WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\sc.v":20)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 4("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\sc.v":23)
+Compiling module 'CU'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\cu.v":1)
+Compiling module 'ram'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\ram.v":1)
+Extracting RAM for identifier 'mem'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\ram.v":12)
+Compiling module 'uart_ram'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\uart_ram.v":1)
+Extracting RAM for identifier 'mem'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\uart_ram.v":34)
+Compiling module 'hex_to_decimal'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\hex_to_decimal.v":1)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 8("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\hex_to_decimal.v":15)
+WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\hex_to_decimal.v":22)
+WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\hex_to_decimal.v":23)
+Compiling module 'bcd_to_7led'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\bcd_to_7led.v":1)
+Compiling module 'uart_tx'("G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\uart_tx.v":1)
+NOTE  (EX0101) : Current top module is "top_cpu"
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\gwsynthesis\top_cpu.vg" completed
+[100%] Generate report file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\gwsynthesis\top_cpu_syn.rpt.html" completed
+GowinSynthesis finish

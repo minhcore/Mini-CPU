@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gowin-synthesis-project>
+<Project>
+    <Version>beta</Version>
+    <Device id="GW1NR-9C" package="QFN88P" speed="6" partNumber="GW1NR-LV9QN88PC6/I5"/>
+    <FileList>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\CIR.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\MAR.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\alu.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\bcd_to_7led.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\cu.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\flag_check.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\hex_to_decimal.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\ram.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\regC.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\register.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\sc.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\top_cpu.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\uart_ram.v" type="verilog"/>
+        <File path="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\uart_tx.v" type="verilog"/>
+    </FileList>
+    <OptionList>
+        <Option type="disable_insert_pad" value="0"/>
+        <Option type="global_freq" value="50.000"/>
+        <Option type="looplimit" value="2000"/>
+        <Option type="output_file" value="G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\gwsynthesis\top_cpu.vg"/>
+        <Option type="print_all_synthesis_warning" value="0"/>
+        <Option type="ram_rw_check" value="0"/>
+        <Option type="top_module" value="top_cpu"/>
+        <Option type="vcc" value="1.2"/>
+        <Option type="verilog_language" value="verilog-2001"/>
+        <Option type="vhdl_language" value="vhdl-1993"/>
+    </OptionList>
+</Project>

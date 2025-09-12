@@ -1,0 +1,69 @@
+{
+ "Device" : "GW1NR-9C",
+ "Files" : [
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/CIR.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/MAR.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/alu.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/bcd_to_7led.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/cu.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/flag_check.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/hex_to_decimal.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/ram.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/regC.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/sc.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/uart_ram.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/uart_tx.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/impl/temp/rtl_parser.result",
+ "Top" : "top_cpu",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

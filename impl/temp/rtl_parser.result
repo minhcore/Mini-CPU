@@ -1,0 +1,206 @@
+[
+ {
+  "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+  "InstLine" : 1,
+  "InstName" : "top_cpu",
+  "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+  "ModuleLine" : 1,
+  "ModuleName" : "top_cpu",
+  "SubInsts" : [
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 86,
+    "InstName" : "regA",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 97,
+    "InstName" : "regB",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 108,
+    "InstName" : "regC",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/regC.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "regC"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 120,
+    "InstName" : "regD",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 131,
+    "InstName" : "regE",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 142,
+    "InstName" : "regF",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 153,
+    "InstName" : "regG",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 164,
+    "InstName" : "regH",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 175,
+    "InstName" : "MAR",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/MAR.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "MAR"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 183,
+    "InstName" : "MDR",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 194,
+    "InstName" : "CIR",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/CIR.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "CIR"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 205,
+    "InstName" : "AR",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 216,
+    "InstName" : "flag_check",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/flag_check.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "flag_check"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 228,
+    "InstName" : "ALU",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/alu.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "alu"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 237,
+    "InstName" : "SC",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/sc.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "SC"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 249,
+    "InstName" : "PC",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/register.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "register"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 260,
+    "InstName" : "CU",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/cu.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "CU"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 318,
+    "InstName" : "RAM",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/ram.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "ram"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 327,
+    "InstName" : "uart_ram",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/uart_ram.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "uart_ram"
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 339,
+    "InstName" : "led_segment",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/hex_to_decimal.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "hex_to_decimal",
+    "SubInsts" : [
+     {
+      "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/hex_to_decimal.v",
+      "InstLine" : 32,
+      "InstName" : "led_ones_module",
+      "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/bcd_to_7led.v",
+      "ModuleLine" : 1,
+      "ModuleName" : "bcd_to_7led"
+     },
+     {
+      "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/hex_to_decimal.v",
+      "InstLine" : 37,
+      "InstName" : "led_tens_module",
+      "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/bcd_to_7led.v",
+      "ModuleLine" : 1,
+      "ModuleName" : "bcd_to_7led"
+     },
+     {
+      "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/hex_to_decimal.v",
+      "InstLine" : 42,
+      "InstName" : "led_hundreds_module",
+      "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/bcd_to_7led.v",
+      "ModuleLine" : 1,
+      "ModuleName" : "bcd_to_7led"
+     }
+    ]
+   },
+   {
+    "InstFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/top_cpu.v",
+    "InstLine" : 348,
+    "InstName" : "uart_tx",
+    "ModuleFile" : "G:/Other computers/My Computer/study_folder_sh/design cpu/top_cpu/src/uart_tx.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "uart_tx"
+   }
+  ]
+ }
+]

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="top_cpu" Register="1" Lut="2" T_Register="225(1)" T_Alu="16(0)" T_Lut="474(2)" T_Bsram="2(0)">
+ <SubModule name="regA" Register="8" T_Register="8(8)"/>
+ <SubModule name="regB" Register="8" T_Register="8(8)"/>
+ <SubModule name="regC" Register="8" Lut="89" T_Register="8(8)" T_Lut="89(89)"/>
+ <SubModule name="regD" Register="8" T_Register="8(8)"/>
+ <SubModule name="regE" Register="8" T_Register="8(8)"/>
+ <SubModule name="regF" Register="8" T_Register="8(8)"/>
+ <SubModule name="regG" Register="8" T_Register="8(8)"/>
+ <SubModule name="regH" Register="8" T_Register="8(8)"/>
+ <SubModule name="MAR" Register="8" T_Register="8(8)"/>
+ <SubModule name="MDR" Register="16" T_Register="16(16)"/>
+ <SubModule name="CIR" Register="16" T_Register="16(16)"/>
+ <SubModule name="AR" Register="8" T_Register="8(8)"/>
+ <SubModule name="flag_check" Register="4" Lut="4" T_Register="4(4)" T_Lut="4(4)"/>
+ <SubModule name="ALU" Alu="16" Lut="14" T_Alu="16(16)" T_Lut="14(14)"/>
+ <SubModule name="SC" Register="4" Lut="5" T_Register="4(4)" T_Lut="5(5)"/>
+ <SubModule name="PC" Register="8" Lut="26" T_Register="8(8)" T_Lut="26(26)"/>
+ <SubModule name="CU" Register="2" Lut="78" T_Register="2(2)" T_Lut="78(78)"/>
+ <SubModule name="RAM" Register="1" Lut="108" Bsram="1" T_Register="1(1)" T_Lut="108(108)" T_Bsram="1(1)"/>
+ <SubModule name="uart_ram" Register="71" Lut="54" Bsram="1" T_Register="71(71)" T_Lut="54(54)" T_Bsram="1(1)"/>
+ <SubModule name="led_segment" T_Lut="60(0)">
+  <SubModule name="led_ones_module" Lut="19" T_Lut="19(19)"/>
+  <SubModule name="led_tens_module" Lut="20" T_Lut="20(20)"/>
+  <SubModule name="led_hundreds_module" Lut="21" T_Lut="21(21)"/>
+ </SubModule>
+ <SubModule name="uart_tx" Register="22" Lut="34" T_Register="22(22)" T_Lut="34(34)"/>
+</Module>

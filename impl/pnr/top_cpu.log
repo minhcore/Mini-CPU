@@ -1,0 +1,29 @@
+Reading netlist file: "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\gwsynthesis\top_cpu.vg"
+Parsing netlist file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\gwsynthesis\top_cpu.vg" completed
+Processing netlist completed
+Reading constraint file: "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\src\top_cpu.cst"
+Physical Constraint parsed completed
+Running placement......
+[10%] Placement Phase 0 completed
+[20%] Placement Phase 1 completed
+[30%] Placement Phase 2 completed
+[50%] Placement Phase 3 completed
+Running routing......
+[60%] Routing Phase 0 completed
+[70%] Routing Phase 1 completed
+[80%] Routing Phase 2 completed
+[90%] Routing Phase 3 completed
+Running timing analysis......
+[95%] Timing analysis completed
+Placement and routing completed
+Bitstream generation in progress......
+Bitstream generation completed
+Running power analysis......
+[100%] Power analysis completed
+Generate file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\pnr\top_cpu.power.html" completed
+Generate file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\pnr\top_cpu.pin.html" completed
+Generate file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\pnr\top_cpu.rpt.html" completed
+Generate file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\pnr\top_cpu.rpt.txt" completed
+Generate file "G:\Other computers\My Computer\study_folder_sh\design cpu\top_cpu\impl\pnr\top_cpu.tr.html" completed
+Fri Sep  5 10:37:04 2025
+
